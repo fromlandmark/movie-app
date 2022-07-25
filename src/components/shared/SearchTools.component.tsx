@@ -3,8 +3,9 @@ import { MutableRefObject, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { useDebounce } from "../../hooks/useDebounce.hook";
 import { fetchSearchResults } from "../../services/api";
-import { HiSearch, HiStar, HiX, HiPhotograph } from "react-icons/hi";
+import { HiSearch, HiStar, HiX } from "react-icons/hi";
 import { EmptyPicture } from "./EmptyPicture.component";
+import { Movie } from "../../types/Movie.type";
 
 const SearchContainer = styled.div`
 	width: 100%;
@@ -31,7 +32,7 @@ const SearchInputContainer = styled.div`
 	height: 48px;
 	font-size: 14px;
 	background: rgba(0, 0, 0, 1);
-	border: 0.5px solid rgba(255, 255, 255, 1);
+	border: 0.5px solid rgba(255, 255, 255, 0.4);
 	border-radius: 4px;
 	padding: 0 12px;
 	gap: 8px;
@@ -116,7 +117,7 @@ export const SearchTools = () => {
 					defaultValue={filter}
 					onChange={triggerSeachContainer}
 				/>
-				<HiX onClick={cleanSearch}></HiX>
+				{filter.length > 3 ? <HiX onClick={cleanSearch}></HiX> : ""}
 			</SearchInputContainer>
 			{seachActive && (
 				<SearchResults>
@@ -124,7 +125,7 @@ export const SearchTools = () => {
 						<div>Loading</div>
 					) : (
 						<div>
-							{searchResults.results.map((result: any) => (
+							{searchResults.results.map((result: Movie) => (
 								<MovieItem key={result.id}>
 									{result.poster_path !== null ? (
 										<img
@@ -135,7 +136,7 @@ export const SearchTools = () => {
 									) : (
 										<EmptyPicture></EmptyPicture>
 									)}
-									<a className="movie_information">
+									<a href="#" className="movie_information">
 										<p className="movie_title">{result.original_title}</p>
 										<div className="movie_details">
 											<HiStar fill="gold"></HiStar>

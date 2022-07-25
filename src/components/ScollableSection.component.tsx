@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Movie } from "../types/Movie.type";
 import { ThumbnailSkeleton } from "./shared/thumbnail.skeleton";
 
 const ScrollableSectionWrapper = styled.section`
@@ -59,7 +60,7 @@ export const ScrollableSection = (props: any) => {
 			<h3 className="scrollable__title">{props.label}</h3>
 			{props.fetched && (
 				<ScrollableWrapper>
-					{props.items.map((item: any) => (
+					{props.items.map((item: Movie) => (
 						<ScrollThumbnail key={item.id}>
 							<img src={process.env.REACT_APP_MOVIES_BASE_URL + props.size + item.poster_path} alt="" />
 							<p>{item.original_title}</p>

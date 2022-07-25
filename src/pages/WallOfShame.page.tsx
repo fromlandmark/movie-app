@@ -4,6 +4,7 @@ import { cleanDislikes, moviesDate } from "../features/taste/tasteSlice";
 import { ThemeLayout } from "../layout/ThemeLayout.layout";
 import { Headline } from "../styles/Typography";
 import { CleanButton, EmptyMovieState, Grid, ScrollThumbnail } from "../styles/Wall.styles";
+import { Movie } from "../types/Movie.type";
 
 export const WallOfShamePage = () => {
 	const moviesData = useSelector(moviesDate);
@@ -15,7 +16,7 @@ export const WallOfShamePage = () => {
 				<>
 					<Headline>Wall of Shame</Headline>
 					<Grid>
-						{moviesData.dislikes.map((movie: any) => (
+						{moviesData.dislikes.map((movie: Movie) => (
 							<ScrollThumbnail href={`movies/${movie.id}`} key={movie.id}>
 								<img src={process.env.REACT_APP_MOVIES_BASE_URL + "w92" + movie.poster_path} alt="" />
 								<p>{movie.original_title}</p>
